@@ -30,6 +30,11 @@ export function Sidebar({ json, setJson, searchPath, setSearchPath, searchResult
       />
 
       <div className="flex flex-col gap-2 mt-auto flex-shrink-0">
+        
+        <div className="text-sm text-foreground">
+          *You can click a node to copy its path.
+        </div>
+        
         <Button 
           onClick={handleClear}
           variant="secondary"

@@ -14,6 +14,7 @@ import "@xyflow/react/dist/base.css";
 import { toPng } from "html-to-image";
 import { useTheme } from "next-themes";
 import { generateNodesAndEdges } from "@/lib/jsonUtils";
+import toast from "react-hot-toast";
 
 interface CanvasAreaProps {
   json: string;
@@ -91,6 +92,24 @@ function FlowCanvas({ json, searchPath, setSearchResult, exportImageRef }: Canva
       console.error("Failed to export image:", error);
     }
   }, [theme]);
+
+  const onNodeClick = useCallback((_: any, node: any) => {
+  if (!node?.id) return;
+
+  navigator.clipboard.writeText(node.id)
+    .then(() => {
+      toast.success("Path copied!", {
+        style: {
+          background: theme === "dark" ? "#1f1f1f" : "#fff",
+          color: theme === "dark" ? "#fff" : "#000",
+          border: theme === "dark" ? "1px solid #333" : "1px solid #ddd",
+        },
+      });
+    })
+    .catch(() => {
+      toast.error("Failed to copy path.");
+    });
+}, [theme]);
 
   useEffect(() => {
     if (exportImageRef) {
@@ -180,6 +199,7 @@ function FlowCanvas({ json, searchPath, setSearchResult, exportImageRef }: Canva
         onConnect={onConnect}
         onNodeMouseEnter={onNodeMouseEnter}
         onNodeMouseLeave={onNodeMouseLeave}
+        onNodeClick={onNodeClick}
         fitView
       >
         <MiniMap
