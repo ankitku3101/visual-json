@@ -102,6 +102,7 @@ You need to have [Node.js](https://nodejs.org/en/) (v20+) and `npm` (or `yarn`/`
 ## Project Structure
 
 Here is a brief overview of the key files and directories in this project:
+```sh
 visual-json/
 ├── app/
 │   └── page.tsx                # Main page component — defines the overall layout and structure
@@ -118,10 +119,11 @@ visual-json/
 │   └── jsonUtils.ts            # Utility logic to convert JSON into React Flow nodes and edges
 │
 └── package.json                # Project dependencies, scripts, and metadata
+```
 
 ## TODO
 
-Make it ready-to-use for mobile-screens.
-Add more interactivity in Canvas.
-Give option for user-custom themes. 
-Give option for user-defined tree layout: vertical/horizontal or any other custom defined.
+* Make it ready-to-use for mobile-screens.
+* Add more interactivity in Canvas.
+* Give option for user-custom themes. 
+* Give option for user-defined tree layout: vertical/horizontal or any other custom defined.
