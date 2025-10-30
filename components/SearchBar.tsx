@@ -17,7 +17,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-2 w-full">
-      <label className="text-lg font-medium text-foreground/80">
+      <label className="text-sm sm:text-base font-medium text-foreground/80">
         Search by JSON Path
       </label>
       
@@ -27,15 +27,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           type="text"
           value={searchPath}
           onChange={(e) => setSearchPath(e.target.value)}
-          placeholder="e.g., $.user.address.city or items[0].name"
-          className="pl-10"
+          placeholder="e.g., $.user.name"
+          className="pl-10 text-sm"
         />
       </div>
 
-      <div className="min-h-5">
+      <div className="min-h-[20px]">
         {searchResult && (
           <p 
-            className={`text-sm font-medium ${
+            className={`text-xs sm:text-sm font-medium ${
               searchResult.found ? "text-green-600" : "text-red-500"
             }`}
           >
@@ -44,12 +44,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         )}
       </div>
 
-      <div className="text-xs text-muted-foreground mt-1">
-        <p>Examples:</p>
-        <ul className="list-disc list-inside space-y-1 mt-1">
-          <li>$.user.name</li>
-          <li>$.items[0].price</li>
-          <li>$.user.address.city</li>
+      <div className="text-xs text-muted-foreground">
+        <p className="font-medium">Examples:</p>
+        <ul className="list-disc list-inside space-y-0.5 mt-1">
+          <li className="truncate">$.user.name</li>
+          <li className="truncate">$.items[0].price</li>
         </ul>
       </div>
     </div>

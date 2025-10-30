@@ -29,17 +29,17 @@ export function generateNodesAndEdges(json: any) {
 
     const bgColor =
       type === "object"
-        ? "rgba(147, 197, 253, 0.3)" 
+        ? "rgba(96, 165, 250, 0.2)" 
         : type === "array"
-        ? "rgba(187, 247, 208, 0.3)" 
-        : "rgba(255, 237, 213, 0.3)"
+        ? "rgba(134, 239, 172, 0.2)" 
+        : "rgba(251, 191, 36, 0.2)" 
 
     const textColor =
       type === "object"
-        ? "#1e40af" 
+        ? "#60a5fa"  
         : type === "array"
-        ? "#065f46" 
-        : "#92400e" 
+        ? "#4ade80" 
+        : "#fbbf24" 
 
     const node = {
       id: path,
@@ -62,7 +62,7 @@ export function generateNodesAndEdges(json: any) {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        border: "1px solid rgba(0,0,0,0.1)",
+        border: `1px solid ${textColor}40`,
       },
     }
     nodes.push(node)
@@ -74,7 +74,7 @@ export function generateNodesAndEdges(json: any) {
         source: parentPath, 
         target: path,
         animated: false,
-        style: { stroke: '#94a3b8' }
+        style: { stroke: '#64748b' }
       })
     }
 

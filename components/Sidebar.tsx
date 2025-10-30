@@ -20,7 +20,12 @@ export function Sidebar({ json, setJson, searchPath, setSearchPath, searchResult
   };
 
   return (
-    <div className="flex flex-col gap-4 h-full">
+    <div className="flex flex-col gap-3 sm:gap-4 h-full overflow-y-auto">
+      <div className="flex items-center justify-between flex-shrink-0">
+        <h2 className="text-base sm:text-lg font-semibold">JSON Visualizer</h2>
+        <ThemeToggle />
+      </div>
+
       <JsonInput json={json} setJson={setJson} />
 
       <SearchBar 
@@ -29,17 +34,19 @@ export function Sidebar({ json, setJson, searchPath, setSearchPath, searchResult
         searchResult={searchResult}
       />
 
-      <Button 
-        onClick={handleClear}
-        variant="secondary"
-        className="w-full"
-      >
-        Clear All
-      </Button>
-        
-      <Button>
-        Export as Image
-      </Button>
+      <div className="flex flex-col gap-2 mt-auto flex-shrink-0">
+        <Button 
+          onClick={handleClear}
+          variant="secondary"
+          className="w-full text-sm"
+        >
+          Clear All
+        </Button>
+          
+        <Button className="w-full text-sm">
+          Export as Image
+        </Button>
+      </div>
     </div>
   );
 }

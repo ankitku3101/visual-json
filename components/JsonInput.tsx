@@ -57,26 +57,27 @@ export const JsonInput: React.FC<JsonInputProps> = ({ json, setJson }) => {
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <label className="text-lg font-medium text-foreground/80">Enter your JSON Data</label>
+      <label className="text-sm sm:text-base font-medium text-foreground/80">
+        Enter JSON Data
+      </label>
       <Textarea
         value={inputValue}
         onChange={handleChange}
         placeholder='{"name": "John", "age": 30}'
         className={clsx(
-          "h-55 font-mono text-sm p-2 rounded-md border bg-card text-card-foreground",
+          "h-40 sm:h-60 font-mono text-xs sm:text-sm p-2 rounded-md border bg-card text-card-foreground resize-none",
           error ? "border-red-500" : "border-border",
           "focus:outline-none focus:ring-2 focus:ring-primary"
         )}
-        rows={8}
       />
       
       {error && (
-        <p className="text-sm text-red-500 font-medium">{error}</p>
+        <p className="text-xs sm:text-sm text-red-500 font-medium">{error}</p>
       )}
 
       <Button 
         onClick={handleVisualize}
-        className="w-full"
+        className="w-full text-sm"
       >
         Visualize Tree
       </Button>
@@ -86,7 +87,7 @@ export const JsonInput: React.FC<JsonInputProps> = ({ json, setJson }) => {
           type="file"
           accept=".json"
           onChange={handleFileUpload}
-          className="mt-2 cursor-pointer"
+          className="cursor-pointer text-xs sm:text-sm"
         />
       </div>
     </div>
