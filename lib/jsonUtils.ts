@@ -67,7 +67,7 @@ export function generateNodesAndEdges(json: any) {
     }
     nodes.push(node)
 
-    // Create edge from parent to current node
+    //This creates the edge from parent to current node
     if (parentPath) {
       edges.push({ 
         id: `${parentPath}->${path}`, 
@@ -78,13 +78,13 @@ export function generateNodesAndEdges(json: any) {
       })
     }
 
-    // Recursively walk through objects
+    // and this is being used to walk through objects
     if (type === "object") {
       Object.entries(value).forEach(([k, v]) =>
         walk(v, `${path}.${k}`, depth + 1, k, path)
       )
     } 
-    // Recursively walk through arrays
+    // same like above, walk through arrays
     else if (type === "array") {
       value.forEach((v: any, i: number) =>
         walk(v, `${path}[${i}]`, depth + 1, `[${i}]`, path)
