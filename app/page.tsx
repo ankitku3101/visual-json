@@ -2,7 +2,7 @@
 
 import { Sidebar } from '@/components/Sidebar'
 import CanvasArea from '@/components/CanvasArea'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function Home() {
@@ -28,6 +28,15 @@ export default function Home() {
   const [json, setJson] = useState(JSON.stringify(sampleJson, null, 2));
   const [searchPath, setSearchPath] = useState('');
   const [searchResult, setSearchResult] = useState<{ found: boolean; message: string } | null>(null);
+  
+  // Reference to trigger export from CanvasArea
+  const exportImageRef = useRef<(() => void) | null>(null);
+
+  const handleExportImage = () => {
+    if (exportImageRef.current) {
+      exportImageRef.current();
+    }
+  };
 
   return (
     <main className="flex h-screen gap-4 p-4">
@@ -39,6 +48,7 @@ export default function Home() {
           searchPath={searchPath}
           setSearchPath={setSearchPath}
           searchResult={searchResult}
+          onExportImage={handleExportImage}
         />
       </div>
       <div className='flex-1 flex flex-col gap-3'>
@@ -54,6 +64,7 @@ export default function Home() {
             json={json} 
             searchPath={searchPath}
             setSearchResult={setSearchResult}
+            exportImageRef={exportImageRef}
           />
         </div>
       </div>

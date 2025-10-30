@@ -10,9 +10,10 @@ interface SidebarProps {
   searchPath: string;
   setSearchPath: (value: string) => void;
   searchResult: { found: boolean; message: string } | null;
+  onExportImage: () => void;
 }
 
-export function Sidebar({ json, setJson, searchPath, setSearchPath, searchResult }: SidebarProps) {
+export function Sidebar({ json, setJson, searchPath, setSearchPath, searchResult, onExportImage }: SidebarProps) {
 
   const handleClear = () => {
     setJson('');
@@ -21,11 +22,6 @@ export function Sidebar({ json, setJson, searchPath, setSearchPath, searchResult
 
   return (
     <div className="flex flex-col gap-3 sm:gap-4 h-full overflow-y-auto">
-      <div className="flex items-center justify-between flex-shrink-0">
-        <h2 className="text-base sm:text-lg font-semibold">JSON Visualizer</h2>
-        <ThemeToggle />
-      </div>
-
       <JsonInput json={json} setJson={setJson} />
 
       <SearchBar 
@@ -43,7 +39,10 @@ export function Sidebar({ json, setJson, searchPath, setSearchPath, searchResult
           Clear All
         </Button>
           
-        <Button className="w-full text-sm">
+        <Button 
+          onClick={onExportImage}
+          className="w-full text-sm"
+        >
           Export as Image
         </Button>
       </div>
