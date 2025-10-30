@@ -123,6 +123,7 @@ visual-json/
 
 ## TODO
 
+* Improve the Export feature with better customisations.
 * Make it ready-to-use for mobile-screens.
 * Add more interactivity in Canvas.
 * Give option for user-custom themes. 
