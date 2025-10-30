@@ -56,11 +56,25 @@ function FlowCanvas({ json, searchPath, setSearchResult, exportImageRef }: Canva
   const { nodes: initialNodes, edges: initialEdges } = generateNodesAndEdges(parsedJson);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [hoveredNode, setHoveredNode] = React.useState<{ path: string; value: string } | null>(null);
+
 
   const onConnect = useCallback(
     (params: any) => setEdges((eds) => addEdge(params, eds)),
     []
   );
+
+  const onNodeMouseEnter = useCallback((_: any, node: any) => {
+    setHoveredNode({
+      path: node.id,
+      value: node.data?.value ?? node.data?.label ?? '—',
+    });
+  }, []);
+
+  const onNodeMouseLeave = useCallback(() => {
+    setHoveredNode(null);
+  }, []);
+
 
   const exportToImage = useCallback(async () => {
     if (!flowRef.current) return;
@@ -157,13 +171,15 @@ function FlowCanvas({ json, searchPath, setSearchResult, exportImageRef }: Canva
   }, [searchPath, nodes, setNodes, setSearchResult]);
 
   return (
-    <div ref={flowRef} className="h-full w-full flex-1 border rounded-lg overflow-hidden">
+    <div ref={flowRef} className="my-flow h-full w-full flex-1 border rounded-lg overflow-hidden relative">
       <ReactFlow
         nodes={nodes.map((n) => ({ ...n, type: "default" }))}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onNodeMouseEnter={onNodeMouseEnter}
+        onNodeMouseLeave={onNodeMouseLeave}
         fitView
       >
         <MiniMap
@@ -176,6 +192,14 @@ function FlowCanvas({ json, searchPath, setSearchResult, exportImageRef }: Canva
         <Controls />
         <Background gap={20} size={1} />
       </ReactFlow>
+
+      {hoveredNode && (
+        <div className="absolute top-2 right-2 z-50 bg-popover text-popover-foreground border border-border shadow-lg rounded-lg p-3 text-xs max-w-xs">
+          <div className="font-semibold text-foreground mb-1">Node Details</div>
+          <div><span className="font-medium text-foreground">Path:</span> {hoveredNode.path}</div>
+          <div><span className="font-medium text-foreground">Value:</span> {hoveredNode.value}</div>
+        </div>
+      )}
     </div>
   );
 }

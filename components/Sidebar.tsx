@@ -1,7 +1,6 @@
-// 'use client'
+'use client'
 import { Button } from "@/components/ui/button";
 import { JsonInput } from "./JsonInput";
-import { ThemeToggle } from "./ThemeToggle";
 import { SearchBar } from "./SearchBar";
 
 interface SidebarProps {
